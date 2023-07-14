@@ -8,7 +8,7 @@ object CParser extends JavaTokenParsers with IParser {
     opt("""0[xX]?""".r) ~ integer ~ opt("[uU]?[lL]?")
 
   def integer: Parser[String] =
-    """[1-9]\d*""".r
+    """(0|[1-9]\d*)""".r
 
   override def parse[A](in: Reader[Char]): CParser.ParseResult[A] = ???
 }
