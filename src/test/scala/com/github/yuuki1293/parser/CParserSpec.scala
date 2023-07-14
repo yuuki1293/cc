@@ -8,10 +8,22 @@ import scala.util.parsing.combinator.JavaTokenParsers
 import scala.util.parsing.input.CharArrayReader
 
 class CParserSpec extends AnyFlatSpec with Diagrams {
-  "integer" should "数値リテラルを解析する" in {
-    assert(
-      parseAll(CParser.integer, "123")
+  "integer" should "Successfully parse integer literal" in {
+    def parseSuccessful(input: CharSequence) =
+      parseAll(CParser.integer, input)
         .successful
-    )
+
+    assert(parseSuccessful("123"))
+    assert(parseSuccessful("0"))
+  }
+
+  it should "Fail to parse integer literal" in {
+    def parseFailure(input: CharSequence) =
+      !parseAll(CParser.integer, input)
+        .successful
+
+    assert(parseFailure("123."))
+    assert(parseFailure("0124"))
+    assert(parseFailure(".123"))
   }
 }
