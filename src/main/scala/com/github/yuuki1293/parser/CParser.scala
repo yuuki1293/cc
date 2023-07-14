@@ -4,7 +4,7 @@ import scala.util.parsing.combinator.*
 import scala.util.parsing.input.Reader
 
 object CParser extends JavaTokenParsers {
-  def integer_constant: CParser.Parser[Option[String] ~ String ~ Option[String]] =
+  def integerConstant: CParser.Parser[Option[String] ~ String ~ Option[String]] =
     opt("""0[xX]?""".r) ~ integer ~ opt("[uU]?[lL]?")
 
   def integer: Parser[String] =
