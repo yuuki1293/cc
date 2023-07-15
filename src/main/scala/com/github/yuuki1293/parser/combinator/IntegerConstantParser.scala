@@ -13,7 +13,7 @@ object IntegerConstantParser extends JavaTokenParsers {
    */
   def integerConstant: Parser[String ~ Option[String]] =
       (octalConstant | hexConstant | decimalConstant)
-      ~ opt("[uU]?[lL]?".r)
+      ~ opt("""[uU]?[lL]?""".r)
 
   /**
    * 10進数のパーサー。
