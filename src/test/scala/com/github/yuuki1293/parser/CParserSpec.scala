@@ -24,7 +24,7 @@ class CParserSpec extends AnyFlatSpec with Diagrams {
 
   "integer" should "Successfully parse integer literal" in {
     def parseSuccessful(input: CharSequence) =
-      parseAll(CParser.integer, input)
+      parseAll(CParser.integerConstant, input)
         .successful
 
     assert(parseSuccessful("123"))
@@ -33,11 +33,12 @@ class CParserSpec extends AnyFlatSpec with Diagrams {
 
   it should "Fail to parse integer literal" in {
     def parseFailure(input: CharSequence) =
-      !parseAll(CParser.integer, input)
+      !parseAll(CParser.integerConstant, input)
         .successful
 
     assert(parseFailure("123."))
-    assert(parseFailure("0124"))
+    assert(parseFailure("+-124"))
     assert(parseFailure(".123"))
+    assert(parseFailure("09"))
   }
 }
