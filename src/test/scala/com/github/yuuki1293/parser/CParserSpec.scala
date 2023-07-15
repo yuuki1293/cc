@@ -8,37 +8,42 @@ import scala.util.parsing.combinator.JavaTokenParsers
 import scala.util.parsing.input.CharArrayReader
 
 class CParserSpec extends AnyFlatSpec with Diagrams {
-  "integerConstant" should "Successfully" in {
-    def parseSuccessful(input: CharSequence) =
-      parseAll(CParser.integerConstant, input)
-        .successful
+  private def parseSuccessful(input: CharSequence) =
+    parseAll(CParser.integerConstant, input)
+      .successful
 
+  private def parseFailure(input: CharSequence) =
+    !parseSuccessful(input)
+
+  "integerConstant" should "10進数をパースする。" in {
     assert(parseSuccessful("0"))
-    assert(parseSuccessful("123"))
-    assert(parseSuccessful("0123"))
-    assert(parseSuccessful("0xAF"))
-    assert(parseSuccessful("123u"))
-    assert(parseSuccessful("123ul"))
-    assert(parseSuccessful("0x12F0ul"))
+    assert(parseSuccessful("1234567890"))
+    assert(parseSuccessful("1234567890u"))
+    assert(parseSuccessful("1234567890l"))
+    assert(parseSuccessful("1234567890ul"))
   }
 
-  "integer" should "Successfully parse integer literal" in {
-    def parseSuccessful(input: CharSequence) =
-      parseAll(CParser.integerConstant, input)
-        .successful
-
-    assert(parseSuccessful("123"))
-    assert(parseSuccessful("0"))
+  it should "8進数をパースする。" in {
+    assert(parseSuccessful("00"))
+    assert(parseSuccessful("012345670"))
+    assert(parseSuccessful("012345670u"))
+    assert(parseSuccessful("012345670l"))
+    assert(parseSuccessful("012345670ul"))
   }
 
-  it should "Fail to parse integer literal" in {
-    def parseFailure(input: CharSequence) =
-      !parseAll(CParser.integerConstant, input)
-        .successful
+  it should "16進数をパースする。" in {
+    assert(parseSuccessful("0x0"))
+    assert(parseSuccessful("0x123aF"))
+    assert(parseSuccessful("0x123aFu"))
+    assert(parseSuccessful("0x123aFl"))
+    assert(parseSuccessful("0x123aFul"))
+  }
 
-    assert(parseFailure("123."))
-    assert(parseFailure("+-124"))
-    assert(parseFailure(".123"))
+  it should "パースに失敗する。" in {
+    assert(parseFailure(""))
+    assert(parseFailure("ABC"))
     assert(parseFailure("09"))
+    assert(parseFailure("0xG"))
+    assert(parseFailure("u"))
   }
 }
