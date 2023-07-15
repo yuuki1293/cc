@@ -12,7 +12,7 @@ object CParser extends JavaTokenParsers {
    * またそれがlongであることを示すのに文字lあるいはLを付けることができる。
    */
   def integerConstant: Parser[String ~ Option[String]] =
-      (decimalConstant | octalConstant | hexConstant)
+      (octalConstant | hexConstant | decimalConstant)
       ~ opt("[uU]?[lL]?".r)
 
   /**
