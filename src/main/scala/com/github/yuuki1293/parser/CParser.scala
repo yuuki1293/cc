@@ -8,7 +8,7 @@ object CParser extends JavaTokenParsers {
   /**
    * 整数のパーサー。
    *
-   * 正定数が符号なしであることを示すには、文字uあるいはUをあとに付けて良い。
+   * 整定数が符号なしであることを示すには、文字uあるいはUをあとに付けて良い。
    * またそれがlongであることを示すのに文字lあるいはLを付けることができる。
    */
   def integerConstant: Parser[String ~ Option[String]] =
