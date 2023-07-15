@@ -1,15 +1,16 @@
-package com.github.yuuki1293.parser
+package com.github.yuuki1293.parser.combinator
 
-import com.github.yuuki1293.parser.CParser.parseAll
+import com.github.yuuki1293.parser.combinator.IntegerConstantParser
+import com.github.yuuki1293.parser.combinator.IntegerConstantParser.parseAll
 import org.scalatest.diagrams.Diagrams
 import org.scalatest.flatspec.AnyFlatSpec
 
 import scala.util.parsing.combinator.JavaTokenParsers
 import scala.util.parsing.input.CharArrayReader
 
-class CParserSpec extends AnyFlatSpec with Diagrams {
+class IntegerConstantParserSpec extends AnyFlatSpec with Diagrams {
   private def parseSuccessful(input: CharSequence) =
-    parseAll(CParser.integerConstant, input)
+    parseAll(IntegerConstantParser.integerConstant, input)
       .successful
 
   private def parseFailure(input: CharSequence) =
