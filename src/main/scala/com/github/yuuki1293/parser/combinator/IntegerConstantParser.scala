@@ -11,34 +11,33 @@ object IntegerConstantParser extends JavaTokenParsers {
    * 整定数が符号なしであることを示すには、文字uあるいはUをあとに付けて良い。
    * またそれがlongであることを示すのに文字lあるいはLを付けることができる。
    */
-  def integerConstant: Parser[String ~ Option[String]] =
-      (octalConstant | hexConstant | decimalConstant)
-      ~ opt("""[uU]?[lL]?""".r)
+  def integerConstant: Regex =
+    s"""($octalConstant|$hexConstant|$decimalConstant)[uU]?[lL]?""".r
 
   /**
-   * 10進数のパーサー。
+   * 10進数にマッチする。
    *
    * 0以外から始まる数字の列。
    * 数字の列は0~9を含む。
    */
-  private def decimalConstant: Parser[String] =
-    """0|[1-9]\d*""".r
+  private def decimalConstant =
+    """0|[1-9]\d*"""
 
   /**
-   * 8進数のパーサー。
+   * 8進数にマッチする。
    *
    * 0から始まる数字の列。
    * 数字の列は0~7を含む。
    */
-  private def octalConstant: Parser[String] =
-    """0[0-7]+""".r
+  private def octalConstant =
+    """0[0-7]+"""
 
   /**
-   * 16進数のパーサー。
+   * 16進数にマッチする。
    *
    * 0xあるいは0Xで始まる数字の列。
    * 数字の列は0～9、a～fまたはA～Fを含む。
    */
-  private def hexConstant: Parser[String] =
-    """0[xX][\da-fA-F]+""".r
+  private def hexConstant =
+    """0[xX][\da-fA-F]+"""
 }

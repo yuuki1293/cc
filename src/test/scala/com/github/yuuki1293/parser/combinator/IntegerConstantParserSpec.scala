@@ -46,5 +46,6 @@ class IntegerConstantParserSpec extends AnyFlatSpec with Diagrams {
     assert(parseFailure("09"))
     assert(parseFailure("0xG"))
     assert(parseFailure("u"))
+    assert(parseFailure("5 u"))
   }
 }
