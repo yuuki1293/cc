@@ -124,4 +124,15 @@ object TerminalSymbol extends RegexParsers {
    * 数字は先頭には使用できない。
    */
   def enumerationConstant: Regex = identifier
+
+  def string: Parser[List[String]] =
+    rep(s"""L?\"($escapedChar|$chars)*\"""".r)
+
+  /**
+   * 複数文字にマッチする。
+   *
+   * NUL、LF、CR、\、"は文字リテラルに含まれない。
+   */
+  private val chars =
+    """[^\x00\f\n\\"]"""
 }

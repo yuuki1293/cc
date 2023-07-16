@@ -6,7 +6,7 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 import scala.util.parsing.combinator.RegexParsers
 
-class TerminalSymbolSpec extends AnyFlatSpec with Diagrams with RegexParsers {
+class TerminalSymbolSpec extends AnyFlatSpec with Diagrams {
   "integerConstant" should "10進数をパースする。" in {
     List(
       "0",
@@ -128,5 +128,24 @@ class TerminalSymbolSpec extends AnyFlatSpec with Diagrams with RegexParsers {
     )
       .map(!parseAll(identifier, _).successful)
       .foreach(assert(_))
+  }
+
+  "string" should "文字列をパースする。" in {
+    List(
+      "\"\"",
+      "\"abc\"",
+      "\"\\t\\n\"",
+      "\"\t\"",
+      "\"ab\" \"cd\\n\""
+    )
+      .foreach(x => assert(parseAll(TerminalSymbol.string, x).successful))
+  }
+
+  it should "パースに失敗する。" in {
+    List(
+      "\"\"\"",
+      "\"",
+      ""
+    )
   }
 }
