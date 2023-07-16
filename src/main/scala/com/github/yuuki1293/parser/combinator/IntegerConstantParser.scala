@@ -20,7 +20,7 @@ object IntegerConstantParser extends RegexParsers {
    * 0以外から始まる数字の列。
    * 数字の列は0~9を含む。
    */
-  private def decimal =
+  private val decimal =
     """0|[1-9]\d*"""
 
   /**
@@ -29,7 +29,7 @@ object IntegerConstantParser extends RegexParsers {
    * 0から始まる数字の列。
    * 数字の列は0~7を含む。
    */
-  private def octal =
+  private val octal =
     """0[0-7]+"""
 
   /**
@@ -38,6 +38,6 @@ object IntegerConstantParser extends RegexParsers {
    * 0xあるいは0Xで始まる数字の列。
    * 数字の列は0～9、a～fまたはA～Fを含む。
    */
-  private def hex =
+  private val hex =
     """0[xX][\da-fA-F]+"""
 }
