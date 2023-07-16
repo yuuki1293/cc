@@ -1,12 +1,12 @@
 package com.github.yuuki1293.parser.combinator
 
-import com.github.yuuki1293.parser.combinator.ConstantParser.*
+import com.github.yuuki1293.parser.combinator.TerminalSymbol.*
 import org.scalatest.diagrams.Diagrams
 import org.scalatest.flatspec.AnyFlatSpec
 
 import scala.util.parsing.combinator.RegexParsers
 
-class ConstantParserSpec extends AnyFlatSpec with Diagrams with RegexParsers {
+class TerminalSymbolSpec extends AnyFlatSpec with Diagrams with RegexParsers {
   "integerConstant" should "10進数をパースする。" in {
     List(
       "0",
@@ -108,6 +108,25 @@ class ConstantParserSpec extends AnyFlatSpec with Diagrams with RegexParsers {
       "a"
     )
       .map(!parseAll(floatingConstant, _).successful)
+      .foreach(assert(_))
+  }
+
+  "identifier" should "識別子をパースする。" in {
+    List(
+      "AbC",
+      "_10",
+      "_"
+    )
+      .map(parseAll(identifier, _).successful)
+      .foreach(assert(_))
+  }
+
+  it should "パースに失敗する" in {
+    List(
+      "",
+      "10c"
+    )
+      .map(!parseAll(identifier, _).successful)
       .foreach(assert(_))
   }
 }

@@ -3,7 +3,7 @@ package com.github.yuuki1293.parser.combinator
 import scala.util.matching.Regex
 import scala.util.parsing.combinator.RegexParsers
 
-object ConstantParser extends RegexParsers {
+object TerminalSymbol extends RegexParsers {
   /**
    * 整数リテラルのパーサー。
    *
@@ -109,11 +109,19 @@ object ConstantParser extends RegexParsers {
     """[^\x00\f\n\\']"""
 
   /**
+   * 識別子をパースする。
+   *
+   * アルファベット、アンダーバーまたは数字で構成される。
+   * 数字は先頭には使用できない。
+   */
+  def identifier: Regex =
+    """[a-zA-Z_]\w""".r
+
+  /**
    * 列挙定数をパースする。
    *
    * アルファベット、アンダーバーまたは数字で構成される。
    * 数字は先頭には使用できない。
    */
-  def enumerationConstant: Regex =
-    """[a-zA-Z_]\w""".r
+  def enumerationConstant: Regex = identifier
 }
