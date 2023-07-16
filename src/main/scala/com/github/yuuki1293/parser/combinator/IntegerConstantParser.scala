@@ -1,10 +1,10 @@
 package com.github.yuuki1293.parser.combinator
 
 import scala.util.matching.Regex
-import scala.util.parsing.combinator.*
+import scala.util.parsing.combinator.RegexParsers
 import scala.util.parsing.input.Reader
 
-object IntegerConstantParser extends JavaTokenParsers {
+object IntegerConstantParser extends RegexParsers {
   /**
    * 整数のパーサー。
    *
