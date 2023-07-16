@@ -115,7 +115,7 @@ object TerminalSymbol extends RegexParsers {
    * 数字は先頭には使用できない。
    */
   def identifier: Regex =
-    """[a-zA-Z_]\w""".r
+    """[a-zA-Z_]\w*""".r
 
   /**
    * 列挙定数をパースする。

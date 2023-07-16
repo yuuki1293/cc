@@ -116,9 +116,7 @@ class TerminalSymbolSpec extends AnyFlatSpec with Diagrams {
       "AbC",
       "_10",
       "_"
-    )
-      .map(parseAll(identifier, _).successful)
-      .foreach(assert(_))
+    ).foreach(x => assert(parseAll(identifier, x).successful))
   }
 
   it should "パースに失敗する" in {
