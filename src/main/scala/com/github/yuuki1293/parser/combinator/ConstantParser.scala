@@ -107,4 +107,13 @@ object ConstantParser extends RegexParsers {
    */
   private val oneChar =
     """[^\x00\f\n\\']"""
+
+  /**
+   * 列挙定数をパースする。
+   *
+   * アルファベット、アンダーバーまたは数字で構成される。
+   * 数字は先頭には使用できない。
+   */
+  def enumerationConstant: Regex =
+    """[a-zA-Z_]\w""".r
 }
