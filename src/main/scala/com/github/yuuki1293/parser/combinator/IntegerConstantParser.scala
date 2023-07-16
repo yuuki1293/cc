@@ -12,7 +12,7 @@ object IntegerConstantParser extends RegexParsers {
    * またそれがlongであることを示すのに文字lあるいはLを付けることができる。
    */
   def integerConstant: Regex =
-    s"""($octalConstant|$hexConstant|$decimalConstant)[uU]?[lL]?""".r
+    s"""($octal|$hex|$decimal)[uU]?[lL]?""".r
 
   /**
    * 10進数にマッチする。
@@ -20,7 +20,7 @@ object IntegerConstantParser extends RegexParsers {
    * 0以外から始まる数字の列。
    * 数字の列は0~9を含む。
    */
-  private def decimalConstant =
+  private def decimal =
     """0|[1-9]\d*"""
 
   /**
@@ -29,7 +29,7 @@ object IntegerConstantParser extends RegexParsers {
    * 0から始まる数字の列。
    * 数字の列は0~7を含む。
    */
-  private def octalConstant =
+  private def octal =
     """0[0-7]+"""
 
   /**
@@ -38,6 +38,6 @@ object IntegerConstantParser extends RegexParsers {
    * 0xあるいは0Xで始まる数字の列。
    * 数字の列は0～9、a～fまたはA～Fを含む。
    */
-  private def hexConstant =
+  private def hex =
     """0[xX][\da-fA-F]+"""
 }
