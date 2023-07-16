@@ -6,7 +6,7 @@ import scala.util.parsing.input.Reader
 
 object IntegerConstantParser extends RegexParsers {
   /**
-   * 整数のパーサー。
+   * 整数リテラルのパーサー。
    *
    * 整定数が符号なしであることを示すには、文字uあるいはUをあとに付けて良い。
    * またそれがlongであることを示すのに文字lあるいはLを付けることができる。
