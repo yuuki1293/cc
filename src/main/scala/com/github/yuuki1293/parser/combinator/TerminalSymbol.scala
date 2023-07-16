@@ -126,7 +126,7 @@ object TerminalSymbol extends RegexParsers {
   def enumerationConstant: Regex = identifier
 
   def string: Parser[List[String]] =
-    rep(s"""L?\"($escapedChar|$chars)*\"""".r)
+    rep1(s"""L?\"($escapedChar|$chars)*\"""".r)
 
   /**
    * 複数文字にマッチする。

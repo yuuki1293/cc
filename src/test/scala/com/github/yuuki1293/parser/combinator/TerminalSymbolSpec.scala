@@ -137,8 +137,7 @@ class TerminalSymbolSpec extends AnyFlatSpec with Diagrams {
       "\"\\t\\n\"",
       "\"\t\"",
       "\"ab\" \"cd\\n\""
-    )
-      .foreach(x => assert(parseAll(TerminalSymbol.string, x).successful))
+    ).foreach(x => assert(parseAll(string, x).successful))
   }
 
   it should "パースに失敗する。" in {
@@ -146,6 +145,6 @@ class TerminalSymbolSpec extends AnyFlatSpec with Diagrams {
       "\"\"\"",
       "\"",
       ""
-    )
+    ).foreach(x => assert(!parseAll(string, x).successful))
   }
 }
