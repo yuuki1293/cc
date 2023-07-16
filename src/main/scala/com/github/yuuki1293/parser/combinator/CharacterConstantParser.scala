@@ -9,9 +9,6 @@ object CharacterConstantParser extends RegexParsers {
    *
    * 文字定数は'x'のように単一引用符で囲まれた一つ以上の文字の列。
    * 文字定数には'文字あるいは改行は含まれない。
-   *
-   *
-   * `L?'\\([ntvbrfa\\?'"]|[0-7]{1,3}|x[\da-fA-F]{1,2})|[^\x00\f\n\\'])'`
    */
   def charConstant: Regex =
     s"""L?'($escapedChar|$oneChar)'""".r
